@@ -88,8 +88,8 @@ class App extends Component {
           ref={videoPlayer => (this.videoPlayer = videoPlayer)}
           resizeMode={this.state.screenType}
           onFullScreen={this.state.isFullScreen}
-          source={{ uri: 'https://clips.vorwaerts-gmbh.de/big_buck_bunny.mp4' }}
-          // source={{ uri: 'http://napi.starsapp.ir/files/stars/17837/videos/1008-17837-1530085991.mp4' }}
+          source={{ uri: 'https://clips.vorwaerts-gmbh.de/big_buck_bunny.mp4' }}  //it's short video
+          // source={{ uri: 'http://napi.starsapp.ir/files/stars/19/videos/662-19-1523101582.mp4' }}  //it's log video 
           style={styles.mediaPlayer}
           volume={10}
         />
