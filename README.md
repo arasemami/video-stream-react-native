@@ -1,4 +1,4 @@
-# video-stream-react-native
+# video-stream-react-native  Ios & Android
 
 ```
 npm install react-native-video --save
