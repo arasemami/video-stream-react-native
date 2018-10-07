@@ -18,6 +18,8 @@ class App extends Component {
       isLoading: true,
       paused: false,
       playerState: PLAYER_STATES.PLAYING,
+      screenType:'content'
+
     };
   }
 
@@ -60,12 +62,15 @@ class App extends Component {
         enterFullScreen = () => {};
 
         onFullScreen = () => {
-          alert('is full screen!');
+          if(this.state.screenType=='content')
+            this.setState({screenType:'cover'});
+         else
+            this.setState({screenType:'content'});
         };
 
         renderToolbar = () => (
           <View >
-            {/* <Text>I'm a custom toolbar </Text> */}
+            {/* <Text> toolbar </Text> */}
           </View>
         );
 
@@ -81,7 +86,8 @@ class App extends Component {
           onProgress={this.onProgress}
           paused={this.state.paused}
           ref={videoPlayer => (this.videoPlayer = videoPlayer)}
-          resizeMode="content"
+          resizeMode={this.state.screenType}
+          onFullScreen={this.state.isFullScreen}
           source={{ uri: 'https://clips.vorwaerts-gmbh.de/big_buck_bunny.mp4' }}
           // source={{ uri: 'http://napi.starsapp.ir/files/stars/17837/videos/1008-17837-1530085991.mp4' }}
           style={styles.mediaPlayer}
