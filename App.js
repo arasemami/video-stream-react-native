@@ -53,15 +53,19 @@ class App extends Component {
 
         onError = () => alert('Oh! ', error);
 
-        exitFullScreen = () => {};
+        exitFullScreen = () => {
+          alert("Exit full screen");
+        };
 
         enterFullScreen = () => {};
 
-        onFullScreen = () => {};
+        onFullScreen = () => {
+          alert('is full screen!');
+        };
 
         renderToolbar = () => (
-          <View style={styles.toolbar}>
-            <Text>I'm a custom toolbar </Text>
+          <View >
+            {/* <Text>I'm a custom toolbar </Text> */}
           </View>
         );
 
