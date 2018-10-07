@@ -8,7 +8,9 @@
   },
   "dependencies": {
     "react": "16.5.0",
-    "react-native": "0.57.0"
+    "react-native": "0.57.0",
+    "react-native-media-controls": "^1.1.1",
+    "react-native-video": "^3.2.1"
   },
   "devDependencies": {
     "babel-jest": "23.6.0",
