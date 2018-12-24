@@ -27,18 +27,19 @@ class App extends Component {
   render() { 
 
     const url = 'https://sample-videos.com/video123/mp4/240/big_buck_bunny_240p_30mb.mp4'
+    // const url = 'http://www.hochmuth.com/mp3/Haydn_Cello_Concerto_D-1.mp3'
     const theme = {
       title: '#FFF',
-      more: '#446984',
-      center: '#7B8F99',
-      fullscreen: '#446984',
-      volume: '#A5957B',
-      scrubberThumb: '#234458',
-      scrubberBar: '#DBD5C7',
-      seconds: '#DBD5C7',
-      duration: '#DBD5C7',
-      progress: '#446984',
-      loading: '#DBD5C7'
+      more: '#fff',
+      center: '#fff',
+      fullscreen: '#fff',
+      volume: '#fff',
+      scrubberThumb: '#E74C3C',
+      scrubberBar: '#ffffff',
+      seconds: '#ffffff',
+      duration: '#fff',
+      progress: '#fff',
+      loading: '#E74C3C'
     }
   
     const logo = 'https://3w0p8bpuk3t3ux7ue14sd2rlzb-wpengine.netdna-ssl.com/wp-content/uploads/2015/09/google-new-logo-if-futura.png'
@@ -49,6 +50,7 @@ class App extends Component {
                 url={url}   
                 theme={theme}
                 logo={logo}
+                resizeMode='cover'
                 rotateToFullScreen
               />
      
@@ -59,7 +61,9 @@ class App extends Component {
 
 var styles = StyleSheet.create({
   container:{ 
-  flex: 1
+  flex: 1,
+  backgroundColor: '#000000',
+  justifyContent: 'center'
   },
   backgroundVideo: {
     position: 'absolute',
