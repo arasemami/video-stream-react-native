@@ -96,7 +96,9 @@ def enableProguardInReleaseBuilds = false
 android {
     compileSdkVersion rootProject.ext.compileSdkVersion
     buildToolsVersion rootProject.ext.buildToolsVersion
-
+    compileOptions {
+        targetCompatibility JavaVersion.VERSION_1_8
+    }
     defaultConfig {
         applicationId "com.videosample"
         minSdkVersion rootProject.ext.minSdkVersion
@@ -137,6 +139,10 @@ android {
 }
 
 dependencies {
+    compile project(':react-native-linear-gradient')
+    compile project(':react-native-orientation')
+    compile project(':react-native-vector-icons')
+    compile project(':react-native-keep-awake')
     compile project(':react-native-video')
     implementation fileTree(dir: "libs", include: ["*.jar"])
     implementation "com.android.support:appcompat-v7:${rootProject.ext.supportLibVersion}"
