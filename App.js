@@ -22,7 +22,7 @@ class App extends Component {
 
   render() { 
 
-    const url = 'https://clips.vorwaerts-gmbh.de/big_buck_bunny.mp4'
+    const url = 'https://sample-videos.com/video123/mp4/240/big_buck_bunny_240p_30mb.mp4'
     const theme = {
       title: '#FFF',
       more: '#446984',
@@ -37,14 +37,14 @@ class App extends Component {
       loading: '#DBD5C7'
     }
   
-
+    const logo = 'https://3w0p8bpuk3t3ux7ue14sd2rlzb-wpengine.netdna-ssl.com/wp-content/uploads/2015/09/google-new-logo-if-futura.png'
     return ( 
       <View style={styles.container}> 
               <Video
                 autoPlay
-                url={url}  
-                // onMorePress={() => this.onMorePress()}
-               // onFullScreen={status => this.onFullScreen(status)}
+                url={url}   
+                theme={theme}
+                logo={logo}
                 rotateToFullScreen
               />
      
