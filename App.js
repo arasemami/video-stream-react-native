@@ -2,6 +2,10 @@ import React,{ Component} from 'react';
 import {View, Text, StyleSheet, Button, ScrollView, Alert, } from 'react-native';
 import Video from 'react-native-af-video-player'
 
+/*
+https://github.com/abbasfreestyle/react-native-af-video-player
+
+*/
 
 class App extends Component {
    
