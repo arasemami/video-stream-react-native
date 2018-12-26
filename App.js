@@ -1,6 +1,6 @@
 import React,{ Component} from 'react';
-import {View, Text, StyleSheet, Button, ScrollView, Alert, } from 'react-native';
-import Video from 'react-native-af-video-player'
+import {View, Text, StyleSheet, Button, ScrollView, Alert, TouchableOpacity } from 'react-native';
+import SoundPlayer from 'react-native-sound-player'
 
 /*
 https://github.com/abbasfreestyle/react-native-af-video-player
@@ -9,60 +9,120 @@ https://github.com/abbasfreestyle/react-native-af-video-player
 
 class App extends Component {
    
- 
-
-  // onFullScreen(status) {
-  //     return !status
+  constructor(props) {
+    super(props);
+    this.state = {
+      duration: '0%',
     
-  // }
+    };
+    this.getInfo = this.getInfo.bind(this)
+  }
+ 
+ 
+ loadSong() {
+    try {
+      SoundPlayer.playUrl('http://media.mtvpersian.net/mp3/Reza%20Pishro/Reza-Pishro-Kalafegi.mp3')
+    } catch (e) {
+      alert('Cannot play the file')
+      console.log('cannot play the song file', e)
+    }
+  }
 
-  // onMorePress() {
-  //   Alert.alert(
-  //     'Boom',
-  //     'This is an action call!',
-  //     [{ text: 'Aw yeah!' }]
-  //   )
-  // }
+  playSong() {
+    console.log("play")
+      SoundPlayer.play()
+   
+  }
+  componentDidCatch() {
+    console.log("aras!")
+  }
+
+  stopSong() {
+    console.log("pause"); 
+    SoundPlayer.pause(); 
+  }
+  endSong() {
+    console.log("stop");
+    SoundPlayer.stop();
+    SoundPlayer.pause();
+    SoundPlayer.unmount();
+  }
+
+
+
+  async getInfo() { // You need the keyword `async`
+  try {
+    const info = await SoundPlayer.getInfo() // Also, you need to await this because it is async
+    console.log('getInfo', parseInt(info.currentTime)) // {duration: 12.416, currentTime: 7.691}
+    let x = (info.currentTime / info.duration )* 100 ;
+    console.log(x)
+
+    this.setState({duration : parseFloat(x) + '%'}) 
+
+   
+     
+    console.log('getInfo', info.duration) // {duration: 12.416, currentTime: 7.691}
+  } catch (e) {
+    console.log('There is no song playing', e)
+  }
+}
+
+
+componentWillUnmount(){
+  console.log("Componetn will unmout")
+  this.endSong();
+}
+
+
+
+
+
+  showDuration = function(size) {
+          
+    return { 
+      width:size, 
+      backgroundColor:'#333', 
+      height:2 
+    }
+    
+  }
 
   render() { 
 
-    const url = 'https://sample-videos.com/video123/mp4/240/big_buck_bunny_240p_30mb.mp4'
-    // const url = 'http://www.hochmuth.com/mp3/Haydn_Cello_Concerto_D-1.mp3'
-    const theme = {
-      title: '#FFF',
-      more: '#fff',
-      center: '#fff',
-      fullscreen: '#fff',
-      volume: '#fff',
-      scrubberThumb: '#E74C3C',
-      scrubberBar: '#ffffff',
-      seconds: '#ffffff',
-      duration: '#fff',
-      progress: '#fff',
-      loading: '#E74C3C'
-    }
-  
-    const logo = 'https://3w0p8bpuk3t3ux7ue14sd2rlzb-wpengine.netdna-ssl.com/wp-content/uploads/2015/09/google-new-logo-if-futura.png'
+
+    
     return ( 
       <View style={styles.container}> 
-              <Video
-                autoPlay
-                url={url}   
-                theme={theme}
-                logo={logo}
-                resizeMode='cover'
-                rotateToFullScreen
-              />
-     
+        <Text>Hellooooooo</Text>
+        <TouchableOpacity onPress={this.loadSong} style={styles.btn}>
+          <Text>Loading sound</Text>
+        </TouchableOpacity>
+
+        <TouchableOpacity onPress={this.playSong} style={styles.btn}>
+          <Text>Paly</Text>
+        </TouchableOpacity>
+
+        <TouchableOpacity onPress={this.stopSong} style={styles.btn}>
+          <Text>Stop</Text>
+        </TouchableOpacity>
+
+        <TouchableOpacity onPress={this.getInfo} style={styles.btn}>
+          <Text>Get Info</Text>
+        </TouchableOpacity>
+
+        <View style={styles.progressContainer}>
+          <View style={ this.showDuration(this.state.duration)}></View>
+        </View>
+        
       </View>
      );
   }
 }
 
-var styles = StyleSheet.create({
+const styles = StyleSheet.create({
   container:{ 
   flex: 1,
-  backgroundColor: '#000000',
+  backgroundColor: '#555',
   justifyContent: 'center'
   },
   backgroundVideo: {
@@ -73,6 +133,17 @@ var styles = StyleSheet.create({
     right: 0,
     
   },
+  btn:{
+    backgroundColor:'#fff',
+    padding: 10,
+    margin: 10
+
+  },
+  progressContainer:{
+    width:'100%',
+    height: 2,
+    backgroundColor:'#fff'
+  }
 });
 
  

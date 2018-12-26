@@ -3,6 +3,7 @@ package com.videosample;
 import android.app.Application;
 
 import com.facebook.react.ReactApplication;
+import com.johnsonsu.rnsoundplayer.RNSoundPlayerPackage;
 import com.BV.LinearGradient.LinearGradientPackage;
 import com.github.yamill.orientation.OrientationPackage;
 import com.oblador.vectoricons.VectorIconsPackage;
@@ -28,6 +29,7 @@ public class MainApplication extends Application implements ReactApplication {
     protected List<ReactPackage> getPackages() {
       return Arrays.<ReactPackage>asList(
           new MainReactPackage(),
+            new RNSoundPlayerPackage(),
             new LinearGradientPackage(),
             new OrientationPackage(),
             new VectorIconsPackage(),
