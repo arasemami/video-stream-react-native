@@ -21,6 +21,7 @@ class App extends Component {
  
  loadSong() {
     try {
+      
       SoundPlayer.playUrl('http://media.mtvpersian.net/mp3/Reza%20Pishro/Reza-Pishro-Kalafegi.mp3')
     } catch (e) {
       alert('Cannot play the file')
