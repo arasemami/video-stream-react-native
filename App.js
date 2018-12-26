@@ -1,5 +1,5 @@
 import React,{ Component} from 'react';
-import {View, Text, StyleSheet, Button, ScrollView, Alert, TouchableOpacity } from 'react-native';
+import {View, Text, StyleSheet, Button, ScrollView, Alert, TouchableOpacity , AppState} from 'react-native';
 import SoundPlayer from 'react-native-sound-player'
 
 /*
@@ -13,6 +13,7 @@ class App extends Component {
     super(props);
     this.state = {
       duration: '0%',
+      appState: AppState.currentState
     
     };
     this.getInfo = this.getInfo.bind(this)
@@ -43,7 +44,7 @@ class App extends Component {
     SoundPlayer.pause(); 
   }
   endSong() {
-    console.log("stop");
+    console.log("end");
     SoundPlayer.stop();
     SoundPlayer.pause();
     SoundPlayer.unmount();
@@ -60,6 +61,9 @@ class App extends Component {
 
     this.setState({duration : parseFloat(x) + '%'}) 
 
+    if(info.currentTime < info.duration)
+    return this.getInfo()
+
    
      
     console.log('getInfo', info.duration) // {duration: 12.416, currentTime: 7.691}
@@ -71,9 +75,23 @@ class App extends Component {
 
 componentWillUnmount(){
   console.log("Componetn will unmout")
+  AppState.removeEventListener('change', this._handleAppStateChange);
   this.endSong();
 }
 
+componentDidMount(){
+  AppState.addEventListener('change', this._handleAppStateChange);
+}
+
+_handleAppStateChange = (nextAppState) => {
+  console.log("bak ground")
+  this.stopSong();
+  if (this.state.appState.match(/inactive|background/) && nextAppState === 'active') {
+     console.log('App has come to the foreground!')
+      this.playSong();
+  }
+  this.setState({appState: nextAppState});
+}
 
 
 
@@ -105,6 +123,10 @@ componentWillUnmount(){
 
         <TouchableOpacity onPress={this.stopSong} style={styles.btn}>
           <Text>Stop</Text>
+        </TouchableOpacity>
+
+        <TouchableOpacity onPress={this.endSong} style={styles.btn}>
+          <Text>End</Text>
         </TouchableOpacity>
 
         <TouchableOpacity onPress={this.getInfo} style={styles.btn}>
