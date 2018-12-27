@@ -63,8 +63,6 @@ class App extends Component {
 
     if(info.currentTime < info.duration)
     return this.getInfo()
-
-   
      
     console.log('getInfo', info.duration) // {duration: 12.416, currentTime: 7.691}
   } catch (e) {
