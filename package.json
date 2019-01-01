@@ -11,6 +11,7 @@
     "react-native": "0.57.0",
     "react-native-af-video-player": "^0.2.1",
     "react-native-media-controls": "^1.1.1",
+    "react-native-slider": "^0.11.0",
     "react-native-sound-player": "^0.6.0",
     "react-native-video": "^3.2.1"
   },
