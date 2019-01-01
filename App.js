@@ -1,7 +1,14 @@
 import React,{ Component} from 'react';
-import {View, Text, StyleSheet, Button, ScrollView, Alert, TouchableOpacity , AppState} from 'react-native';
+import {View, Text, StyleSheet, Button, Image, Alert, TouchableOpacity , AppState} from 'react-native';
 import Video from 'react-native-video';
 import Slider from "react-native-slider";
+
+
+//
+//
+import PlayIcon from './assets/play.svg';
+
+
 
 /*
 https://github.com/abbasfreestyle/react-native-af-video-player
@@ -27,11 +34,16 @@ class App extends Component {
  
 
 
- 
+  onPause(){
+    this.setState({
+      paused: !this.state.paused
+    })
+  }
 
 
   onProgress = data => {
     console.log(data)
+    if (!this.state.paused) 
       this.setState({ currentTime: data.currentTime});
      
   };
@@ -41,6 +53,7 @@ class App extends Component {
    
     this.setState({ duration: data.duration, isLoading: false })
   };
+  onEnd = () => this.setState({ paused: true });
 
 
   seek(time) {
@@ -87,7 +100,9 @@ class App extends Component {
                       ref="audioElement"              // Pauses playback entirely.
                       onLoad={this.onLoad}            // Callback when video loads
                       onProgress={this.onProgress}    // Callback every ~250ms with currentTime
-                        /> 
+                      paused={this.state.paused}
+                      onEnd={this.onEnd}
+                       /> 
                   );
 
 
@@ -112,6 +127,10 @@ class App extends Component {
           minimumValue={0}
           maximumValue={this.state.duration}
           onSlidingComplete={value =>  this.onSeeking(value)}
+          trackStyle={styles.trackStyle}
+          thumbStyle={styles.thumbStyle}
+          minimumTrackTintColor='#333'
+
         />
         <View style={styles.timeDurationContainer}>
           <Text>{this.msToTime(this.state.currentTime)}</Text>
@@ -119,8 +138,18 @@ class App extends Component {
         </View>
 
         <View style={styles.bContainer}>
-          <TouchableOpacity style={styles.btnContainer}>
-            <Text>Playe</Text>
+          <TouchableOpacity style={styles.btnContainer} onPress={this.onPause.bind(this)}>
+            {!this.state.paused ? (
+                    <Image
+                    style={{width: 40, height: 40}}
+                    source={require('./assets/s.png')}
+                  />
+            ) : (
+              <Image
+              style={{width: 40, height: 40}}
+              source={require('./assets/p.png')}
+            />
+            )}
           </TouchableOpacity>
         </View>
      
@@ -154,15 +183,16 @@ const styles = StyleSheet.create({
     alignItems:'center'
   },
 
-  btnContainer:{
-    backgroundColor:'#fff',
+  btnContainer:{ 
     padding: 10,
     margin: 10,
     width:100,
     height:100,
     borderRadius: 100,
     justifyContent:'center',
-    alignItems: 'center',
+    alignItems: 'center', 
+    borderWidth: 5,
+    borderColor: '#ffffff',
 
 
   },
@@ -178,8 +208,14 @@ const styles = StyleSheet.create({
     padding:10,
 
 
-  }
+  },
+  trackStyle:{
+    backgroundColor:'#666',
+  },
+  thumbStyle:{
+    backgroundColor:'#d63031',
 
+  }
 
 
 });

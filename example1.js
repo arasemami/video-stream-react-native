@@ -6,6 +6,8 @@ import {Platform, StyleSheet, Text, View} from 'react-native';
 import Video from 'react-native-video';
 import MediaControls, { PLAYER_STATES } from 'react-native-media-controls';
 
+
+
 class App extends Component {
   videoPlayer;
 
